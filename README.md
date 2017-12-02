@@ -1,4 +1,4 @@
-# GettingAndCleaningDataCourseProject
+# Getting And Cleaning Data Course Project
 
 
 This is a submittal for the class project for Getting and Cleaning Data course. This document starts with a restatement of the assignment. ...
