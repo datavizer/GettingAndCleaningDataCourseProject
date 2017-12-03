@@ -5,11 +5,11 @@ Field Name | Description | Values
 -----------|-------------|--------
 subject_id |An identifier of the subject who carried out the experiment|1-30  
 activity_desc|Activity the subject is performing| LAYING
-    SITTING
-    STANDING
-    WALKING
-    WALKING_DOWNSTAIRS
-    WALKING_UPSTAIRS
+||    SITTING
+||    STANDING
+||    WALKING
+||    WALKING_DOWNSTAIRS
+||    WALKING_UPSTAIRS
 
 
 measure_id
