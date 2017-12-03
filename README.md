@@ -28,7 +28,9 @@ The original data is in multiple files that we need to merge and make tidy. As d
 * 'test/y_test.txt': Test labels.
 
 ## How the scripts work
-The R script called run_analysis.R that does the following.
+The R script called run_analysis.R retrieves and tidies the data. The assumption is that the original data is already downloaded into a subdirectory called "data".
+
+After intializing the work environment and retrieving data (Step 0), run_analysis.R does the following:
 
 Step 1: Merges the training and the test sets to create one data set.
 Step 2: Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -36,19 +38,36 @@ Step 3: Uses descriptive activity names to name the activities in the data set
 Step 4: Appropriately labels the data set with descriptive variable names.
 Step 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+### Step 0: Initialization and retrieve data
+This script uses readr, tidyr, and dplyr. The neeed original data tables are loaded in this step. This includes activity labels and features from the base tables; x_test and y_test from the test tabls, and x_train and y_train from the train tables.
 
-###Script descriptions
+The x tables have 561 data measures that correspond with the items listed in the feature table. I chose to merge these descriptive measure names onto the columns in this step. This results in meaningful field names immediately and the ability to select fields based on parts of the column names.
 
+Since I added meaningful column names, I can remove the feature table at the end of this step. 
 
+### Step 1: Merge training and test
 
+First, dplyr::bind_cols is used to combine subject ID (from subject table), activity ID (from the y tables), and measures (from x tables) 
+for both the test and train data sets. At the same time, a column is added to indicate if a record is from the test or train set. Then dplyr::bind_rows is used to merge the test and training data.
 
-###Instructions
+### Step 2: Extract only measurements on the mean and standard deviation for each measure
 
+Instead of the "grep" functions from Basic R, I chose to use the "select" function from dplyr with the "contains" helper function. The first three columns contain the subject ID, activity ID, and whether it is test or train. The next 561 columns already have meaningful names from Step 0. Those that contain "mean()" or "std()" are selected.
 
-Review criterialess 
-The submitted data set is tidy.
-The Github repo contains the required scripts.
-GitHub contains a code book that modifies and updates the available codebooks with the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
-The README that explains the analysis files is clear and understandable.
-The work submitted for this project is the work of the student who submitted it.
-Getting and Cleaning Data Course Projectless 
+### Step 3: Use descriptive activity names to name the activies in the data set
+
+I chose to do this using dplyr::left_join function. Join the activity_labels table on activity_id to get descriptive activity names.
+
+The variable x_step3 could be piped to x_step2, but is kept separate for ease of illustrating the steps in this exercise.  
+
+### Step 4. Appropriately labels the data set with descriptive variable names
+
+I added appropriate descriptive variable names in Step 0. In this step, I us tidyr::gather to switch all of the measures from columns into individual rows. I then can separate the variable names into separate components. 
+
+The arrangement of the data for tidiness as tall and skinny is a judgement call, but I chose to do this because I assume that the analyst may want to group on the measure type, the measure, or the XYZ coordinate. 
+
+### Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+First, the tidy data from step 4 is grouped, to the level of the individual measure ID. Then the mean is taken for each measure value. I chose to sort the data after that.
+
+Finally, the summary table is written to a text file.

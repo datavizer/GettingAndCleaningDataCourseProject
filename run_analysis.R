@@ -22,8 +22,7 @@
 wd <- "~/GitHub/GettingAndCleaningDataCourseProject"
 setwd(wd)
 
-if(!file.exists("./data")){dir.create("./data")}
-library(readr);library(tidyr);library(dplyr);library(lubridate)
+library(readr);library(tidyr);library(dplyr)
 
 # Load base tables, the tables that provide labels
   setwd("./data/UCI HAR Dataset")
