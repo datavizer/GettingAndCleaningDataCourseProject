@@ -1,14 +1,11 @@
 # Data Dictionary - Summary File for Human Activity Recognition Using Smartphones Data Set 
 
 
+Field Name | Description | Values
+-----------|-------------|--------
+subject_id |An identifier of the subject who carried out the experiment|1-30  
 
-subject_id
-  An identifier of the subject who carried out the experiment 
-  Values: 1-30  
-
-activity_desc
-  Activity the subject is performing
-    LAYING
+activity_desc|Activity the subject is performing| LAYING
     SITTING
     STANDING
     WALKING
