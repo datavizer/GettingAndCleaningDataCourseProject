@@ -100,13 +100,13 @@ library(readr);library(tidyr);library(dplyr)
 #   cleaning on that one field.  
 
   x_tidy <- x_step3 %>% 
-            gather(measure, measure_value, 4:69) %>%
-            separate(measure,c("measure_id","measure","measure_type", 
+            gather(feature, feature_value, 4:69) %>%
+            separate(feature,c("feature_id","feature","feature_type", 
                              "coordinate"), extra = "merge")  %>%
-            select(subject_id, activity_desc, set, measure_id, measure, 
-                   measure_type, coordinate, measure_value) 
+            select(subject_id, activity_desc, set, feature_id, feature, 
+                   feature_type, coordinate, feature_value) 
   
-  x_tidy$measure_id <- as.numeric(x_tidy$measure_id)
+  x_tidy$feature_id <- as.numeric(x_tidy$feature_id)
   
   rm(x_step3)  # this table is no longer needed
   
@@ -115,10 +115,10 @@ library(readr);library(tidyr);library(dplyr)
 #         each subject.   
 
   x_summary <- x_tidy %>%
-            group_by(subject_id, activity_desc, measure_id, 
-                     measure, measure_type, coordinate) %>%
-            summarize(average_value = mean(measure_value)) %>%
-            arrange(subject_id, activity_desc, measure_id)
+            group_by(subject_id, activity_desc, feature_id, 
+                     feature, feature_type, coordinate) %>%
+            summarize(average_value = mean(feature_value)) %>%
+            arrange(subject_id, activity_desc, feature_id)
   
   setwd(wd)
   write.table(x_summary, "./HAR_measures_summary.txt", row.names = FALSE)

@@ -1,4 +1,4 @@
-"subject_id" "activity_desc" "measure_id" "measure" "measure_type" "coordinate" "average_value"
+"subject_id" "activity_desc" "feature_id" "feature" "feature_type" "coordinate" "average_value"
 1 "LAYING" 1 "tBodyAcc" "mean" "X" 0.22159824394
 1 "LAYING" 2 "tBodyAcc" "mean" "Y" -0.0405139534294
 1 "LAYING" 3 "tBodyAcc" "mean" "Z" -0.11320355358
